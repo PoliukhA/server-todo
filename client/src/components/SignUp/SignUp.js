@@ -1,5 +1,6 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
+import { format } from 'date-fns';
 
 const SignUp = () => {
   const initialValues = {
@@ -7,7 +8,7 @@ const SignUp = () => {
     lastName: '',
     email: '',
     password: '',
-    birthday: new Date()
+    birthday: format(new Date(), 'yyy-MM-dd')
   }
 
   const onSubmit = (values, actions) => {
