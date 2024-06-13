@@ -5,7 +5,7 @@ import { registerUser } from '../api';
 import { useNavigate } from 'react-router-dom';
 
 const Home = (props) => {
-  const [state, setState] = useState(true); // true -> SignUp ; false -> SignIn
+  const [state, setState] = useState(true); 
   const [data, setData] = useState();
   const [error, setError] = useState(null);
 
