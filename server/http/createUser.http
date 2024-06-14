@@ -3,7 +3,7 @@ Content-Type: application/json
 
 {
     "email": "myspace@gmail.com",
-    "passwordHash": "qwerty123",
+    "password": "qwerty123",
     "firstName": "John",
     "lastName": "Wick",
     "birthday": "1992-08-02"
