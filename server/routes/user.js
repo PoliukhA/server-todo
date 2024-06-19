@@ -8,5 +8,7 @@ const userRouter = Router();
 userRouter.post('/sign-up', hashPass, UserController.registrationUser);
 // POST http://localhost:5000/api/users/sign-in
 userRouter.post('/sign-in', UserController.loginUser);
+// GET http://localhost:5000/api/users/
+userRouter.get('/', checkToken, UserController.checkAuth);
 
 module.exports = userRouter;
