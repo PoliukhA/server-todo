@@ -4,9 +4,9 @@ const taskRouter = require('./task');
 
 const router = Router();
 
-// http://localhost:5001/api/users
+// http://localhost:5000/api/users
 router.use('/users', userRouter);
-// http://localhost:5001/api/tasks
+// http://localhost:5000/api/tasks
 router.use('/tasks', taskRouter);
 
 module.exports = router;
