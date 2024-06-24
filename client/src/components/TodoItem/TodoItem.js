@@ -1,12 +1,18 @@
 import React from 'react';
-import TodoItem from '../TodoItem/TodoItem';
 
-const TodoList = (props) => {
+const TodoItem = (props) => {
+  const { item: { _id, body, deadline, status } } = props;
+
   return (
-    <ol>
-      {props.todos.map(td => <TodoItem item={td} key={td._id} />)}
-    </ol>
+    <li>
+      <div>
+        <span>{body}</span>
+        <span>{new Date(deadline).toISOString()}</span>
+        <span>{status}</span>
+        <button onClick={() => props.delCallback(_id)}>Delete</button>
+      </div>
+    </li>
   );
 }
 
-export default TodoList;
+export default TodoItem;

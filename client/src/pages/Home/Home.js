@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import SignIn from '../../components/SignIn/SignIn';
 import SignUp from '../../components/SignUp/SignUp';
-import styles from './Home.module.css';
+import styles from './Home.module.scss';
 import { useNavigate } from 'react-router-dom';
 
 const Home = (props) => {
-  const [state, setState] = useState(false); 
+  const [state, setState] = useState(false);
   const [error, setError] = useState(null);
 
   const navigate = useNavigate();
@@ -28,7 +28,6 @@ const Home = (props) => {
   }
 
   const getData = ({ callback, values }) => {
-    // setData(userData);
     callback(values)
       .then(result => {
         props.sendUser(result.data);

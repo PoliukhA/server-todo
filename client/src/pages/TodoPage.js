@@ -1,29 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import TodoList from '../components/TodoList/TodoList';
-import { useNavigate } from "react-router-dom";
-import { getTasks, createTask } from '../api/taskApi';
+import { getTasks, createTask, deleteTask } from '../api/taskApi';
 import TodoForm from '../components/TodoForm/TodoForm';
 
-const TodoPage = (props) => {
+const TodoPage = () => {
   const [todos, setTodos] = useState([]);
-  const navigate = useNavigate();
 
   useEffect(() => {
-    if(!props.user) {
-      return navigate('/');
-    }
-    getTasks(props.user._id)
+    getTasks()
     .then(result => {
       setTodos(result.data);
     })
     .catch(error => {
       console.error(error);
-    })
+    });
   }, []);
 
   const getNewTd = (data) => {
     createTask({
-      authorId: props.user._id,
       status: 'new',
       ...data
     })
@@ -36,11 +30,22 @@ const TodoPage = (props) => {
     });
   }
 
+  const delTask = (id) => {
+    deleteTask(id)
+    .then(({ data: deletedTask }) => {
+      const filteredArray = todos.filter(td => td._id !== deletedTask._id);
+      setTodos(filteredArray);
+    })
+    .catch(error => {
+      console.error(error);
+    })
+  }
+
   return (
     <>
       <h1>Todo List</h1>
       <TodoForm sendData={getNewTd} />
-      <TodoList todos={todos} />
+      <TodoList todos={todos} delCallback={delTask} />
     </>
   );
 }
