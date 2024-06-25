@@ -1,16 +1,21 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
-import { loginUser } from '../../api/userApi';
+import { format } from 'date-fns';
+// import { registerUser } from '../../api/userApi';
+import { registerUser } from '../../api/axiosApi';
 
-const SignIn = (props) => {
+const SignUp = (props) => {
   const initialValues = {
+    firstName: '',
+    lastName: '',
     email: '',
-    password: ''
+    password: '',
+    birthday: format(new Date(), 'yyyy-MM-dd')
   }
 
   const onSubmit = (values, actions) => {
     props.sendData({
-      callback: loginUser,
+      callback: registerUser,
       values
     });
     actions.resetForm();
@@ -18,13 +23,16 @@ const SignIn = (props) => {
 
   return (
     <>
-      <h2>Sign In</h2>
+      <h2>SignUp</h2>
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
         {(formikProps) => (
           <Form>
+            <Field name="firstName" placeholder="Type your name" />
+            <Field name="lastName" placeholder="Type your last name" />
             <Field name="email" placeholder="Type your email" />
             <Field name="password" placeholder="Type your password" />
-            <button type='submit'>Sign in</button>
+            <Field name="birthday" type="date" />
+            <button type="submit">Register</button>
           </Form>
         )}
       </Formik>
@@ -32,4 +40,4 @@ const SignIn = (props) => {
   );
 }
 
-export default SignIn;
+export default SignUp;
